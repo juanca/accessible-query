@@ -60,3 +60,16 @@ it('finds input elements with a value', async () => {
   expect(node).toBe(document.getElementById('test-input'));
   expect(node.getAttribute('value')).toBe('test value');
 });
+
+it('finds elements with a role', async () => {
+  setTimeout(() => {
+    document.body.innerHTML =
+      '<label for="test-input">Test label</label>' +
+      '<input id="test-input" role="combobox" />' +
+      '';
+  }, 10);
+
+  const node = await query('Test label', { role: 'combobox' });
+  expect(node).toBe(document.getElementById('test-input'));
+  expect(node.getAttribute('role')).toBe('combobox');
+});
