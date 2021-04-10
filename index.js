@@ -8,7 +8,7 @@ async function accessibleQuery(label, attributes = {}) {
     const node = screen.queryByLabelText(label) || screen.queryByTitle(label) || screen.queryByText(label);
 
     if (!node) {
-      throw Error(`Element (${label}) not found.`);
+      throw new Error(`Element (${label}) not found.`);
     }
 
     const matches = Object.entries(attributes).every(([attribute, value]) => {
@@ -18,7 +18,7 @@ async function accessibleQuery(label, attributes = {}) {
     if (matches) {
       return node;
     } else {
-      throw Error(`Element (${label}) not found with specific attributes.`);
+      throw new Error(`Element (${label}) not found with specific attributes.`);
     }
   });
 
