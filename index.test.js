@@ -45,3 +45,18 @@ it('finds disabled elements', async () => {
   expect(node).toBe(document.getElementById('test-input'));
   expect(node.getAttribute('disabled')).toBe('');
 });
+
+it('finds input elements with a value', async () => {
+  document.body.innerHTML =
+    '<label for="test-input">Test label</label>' +
+    '<input id="test-input" />' +
+    '';
+
+  setTimeout(() => {
+    document.getElementById('test-input').setAttribute('value', 'test value');
+  }, 10);
+
+  const node = await query('Test label', { value: 'test value' });
+  expect(node).toBe(document.getElementById('test-input'));
+  expect(node.getAttribute('value')).toBe('test value');
+});
