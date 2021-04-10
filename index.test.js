@@ -21,6 +21,16 @@ it('finds titled elements', async () => {
   expect(await query('Test title')).toBe(document.getElementById('test-title'));
 });
 
+it('finds elements by text content', async () => {
+  setTimeout(() => {
+    document.body.innerHTML =
+      '<button id="test-button">Test button</button>' +
+      '';
+  }, 10);
+
+  expect(await query('Test button')).toBe(document.getElementById('test-button'));
+});
+
 it('finds disabled elements', async () => {
   document.body.innerHTML =
     '<label for="test-input">Test label</label>' +

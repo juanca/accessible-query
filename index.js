@@ -5,7 +5,7 @@ const {
 
 async function accessibleQuery(label, attributes = {}) {
   const node = await waitFor(() => {
-    const node = screen.queryByLabelText(label) || screen.queryByTitle(label);
+    const node = screen.queryByLabelText(label) || screen.queryByTitle(label) || screen.queryByText(label);
 
     if (!node) {
       throw Error(`Element (${label}) not found.`);
