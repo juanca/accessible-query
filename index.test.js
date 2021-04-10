@@ -11,6 +11,16 @@ it('finds labelled elements', async () => {
   expect(await query('Test label')).toBe(document.getElementById('test-input'));
 });
 
+it('finds titled elements', async () => {
+  setTimeout(() => {
+    document.body.innerHTML =
+      '<svg><title id="test-title">Test title</title></svg>' +
+      '';
+  }, 10);
+
+  expect(await query('Test title')).toBe(document.getElementById('test-title'));
+});
+
 it('finds disabled elements', async () => {
   document.body.innerHTML =
     '<label for="test-input">Test label</label>' +

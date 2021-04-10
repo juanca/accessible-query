@@ -5,7 +5,11 @@ const {
 
 async function accessibleQuery(label, attributes = {}) {
   const node = await waitFor(() => {
-    const node = screen.getByLabelText(label);
+    const node = screen.queryByLabelText(label) || screen.queryByTitle(label);
+
+    if (!node) {
+      throw Error(`Element (${label}) not found.`);
+    }
 
     const matches = Object.entries(attributes).every(([attribute, value]) => {
       return node.getAttribute(attribute) === value;
